@@ -1,0 +1,143 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void one() {
+	string name;
+	cout << "What`s your name?" << endl;
+	cin >> name;
+	cout << "Nice to meet you, " << name;
+}
+
+void two() {
+	int x, y;
+	cout << "Введите X: ";
+	cin >> x;
+	cout << "Введите Y: ";
+	cin >> y;
+	cout << "Результат сложения: " << x + y << endl;
+	cout << "Результат вычитатния: " << x - y << endl;
+	cout << "Результат умножения: " << x* y << endl;
+	cout << "Результат деления: " << x / y << endl;
+	cout << "Результат остатка от деления: " << x% y << endl;
+}
+
+void three() {
+	int x, y, z;
+	cout << "Введите первое число: ";
+	cin >> x;
+	cout << "Введите второе число: ";
+	cin >> y;
+	z = x;
+	x = y;
+	y = z;
+	cout << "X: " << x << endl;
+	cout << "Y: " << y << endl;
+}
+
+/*void four() {
+	int x, y, res;
+	cout << "Введите X: ";
+	cin >> x;
+	cout << "Введите Y: ";
+	cin >> y;
+	res = ((3 + pow(x, 2) - pow(y, 3)) * ((pow(x, 2) + 2 * x * y + pow(y, 2)))) / (x - pow(y, 2));
+	cout << "Результат: " << res;
+}
+*/
+void five() {
+	// В часе 3600 секунд
+	//В сутках 86 400 секунд
+	int sec, hour;
+	cout << "Введите количесво прошедших секунд: ";
+	cin >> sec;
+	hour = ((sec / 60) / 60) % 24;
+	cout << "Сейчас " << hour << " часов";
+}
+
+void six() {
+	int a, b, count, k, z;
+	cout << "Введите A: ";
+	cin >> a;
+	cout << "Ввведите степень: ";
+	cin >> count;
+	switch(count){
+	case 4:
+	b = a * a;
+	b *= a;
+	cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 6:
+		b = a * a * a;
+		b *= b;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 7:
+		b = a * a * a;
+		b *= b * a;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 8:
+		b = a * a;
+		b *= b * b * b;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 9:
+		b = a * a * a;
+		b *= b * b;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 10:
+		b = a * a;
+		b *= b * a;
+		k = b;
+		b *= k;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 13:
+		b = a * a;
+		b *= b * b;
+		k = b;
+		b *= k * a;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 15:
+	    b = a * a;
+		b *= b * b * a;
+		k = b;
+		b *= k * a;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 21:
+	    b = a * a;
+		b *= b * b * a;
+		k = b;
+		b *= k * b;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 28:
+	    b = a * a; //2
+		b = b * b * b * b; //  
+		b *= b * b * b;
+		cout << a << " в степени " << count << " = " << b << "\n";
+	break;
+	case 64:
+	//Решение
+	break;
+	}
+
+}
+
+int main()
+{
+	int a;
+	setlocale(LC_CTYPE, "rus");
+	//one();
+	//two();
+	//three();
+	//four();
+	//five();
+	six();
+	//system("pause");
+}
