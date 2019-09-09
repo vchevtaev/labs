@@ -18,9 +18,9 @@ void two() {
 	cin >> y;
 	cout << "Результат сложения: " << x + y << endl;
 	cout << "Результат вычитатния: " << x - y << endl;
-	cout << "Результат умножения: " << x* y << endl;
+	cout << "Результат умножения: " << x * y << endl;
 	cout << "Результат деления: " << x / y << endl;
-	cout << "Результат остатка от деления: " << x% y << endl;
+	cout << "Результат остатка от деления: " << x % y << endl;
 }
 
 void three() {
@@ -36,7 +36,7 @@ void three() {
 	cout << "Y: " << y << endl;
 }
 
-/*void four() {
+void four() {
 	int x, y, res;
 	cout << "Введите X: ";
 	cin >> x;
@@ -45,10 +45,7 @@ void three() {
 	res = ((3 + pow(x, 2) - pow(y, 3)) * ((pow(x, 2) + 2 * x * y + pow(y, 2)))) / (x - pow(y, 2));
 	cout << "Результат: " << res;
 }
-*/
 void five() {
-	// В часе 3600 секунд
-	//В сутках 86 400 секунд
 	int sec, hour;
 	cout << "Введите количесво прошедших секунд: ";
 	cin >> sec;
@@ -57,87 +54,152 @@ void five() {
 }
 
 void six() {
-	int a, b, count, k, z;
+	int a, b, count, k, c;
 	cout << "Введите A: ";
 	cin >> a;
 	cout << "Ввведите степень: ";
 	cin >> count;
-	switch(count){
+	switch (count) {
 	case 4:
-	b = a * a;
-	b *= a;
-	cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		b = a * a;
+		b *= a;
+		cout << a << " в степени " << count << " = " << b << "\n";
+		break;
+
 	case 6:
 		b = a * a * a;
 		b *= b;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
+
 	case 7:
 		b = a * a * a;
 		b *= b * a;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
+
 	case 8:
 		b = a * a;
 		b *= b * b * b;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
+
 	case 9:
 		b = a * a * a;
 		b *= b * b;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
+
 	case 10:
 		b = a * a;
 		b *= b * a;
 		k = b;
 		b *= k;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
+
 	case 13:
 		b = a * a;
 		b *= b * b;
 		k = b;
 		b *= k * a;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
 	case 15:
-	    b = a * a;
+		b = a * a;
 		b *= b * b * a;
 		k = b;
 		b *= k * a;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
+		break;
+
 	case 21:
-	    b = a * a;
+		b = a * a;
 		b *= b * b * a;
 		k = b;
 		b *= k * b;
 		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
-	case 28:
-	    b = a * a; //2
-		b = b * b * b * b; //  
-		b *= b * b * b;
-		cout << a << " в степени " << count << " = " << b << "\n";
-	break;
-	case 64:
-	//Решение
-	break;
-	}
+		break;
 
+	case 28:
+		a = a * a; 
+		a = a * a; 
+		b = a;     
+		a = a * a; 
+		c = a;  
+		a = a * a; 
+		a = a * b; 
+		a = a * c;
+		cout << a << " в степени " << count << " = " << a << "\n";
+		break;
+
+	case 64:
+
+		break;
+
+	default: 
+		cout << "Было введено не верное значение \nПовоторите заново... \n";
+		six();
+		break;
+	}
 }
+
+void seven() {
+	double x, x2, a, b, c, e1, e2;
+	cout << "Введите значение переменной \n";
+	cin >> x;
+	x2 = x * x;
+	a = 3 * x2 + 1;
+	b = a - x2;
+	c = 2 * x * b;
+	e1 = a + c;
+	e2 = a - c;
+	cout << "Первое значение: " << e1 << '\n' << "Второе значение: " << e2 << '\n';
+	system("pause");
+}
+
 
 int main()
 {
-	int a;
+	int number;
+	bool mfunction = true;
 	setlocale(LC_CTYPE, "rus");
-	//one();
-	//two();
-	//three();
-	//four();
-	//five();
-	six();
-	//system("pause");
+	while(mfunction == true){
+		cout << "Введите номер задания: ";
+		cin >> number;
+		switch (number) {
+		case 1:
+			one();
+			mfunction = false;
+			break;
+		case 2:
+			two();
+			mfunction = false;
+			break;
+		case 3:
+			three();
+			mfunction = false;
+			break;
+		case 4:
+			four();
+			mfunction = false;
+			break;
+		case 5:
+			five();
+			mfunction = false;
+			break;
+		case 6:
+			six();
+			mfunction = false;
+			break;
+		case 7:
+			seven();
+			mfunction = false;
+			break;
+		default:
+			cout << "Вы ввели неверный номер задания.\nПовторите заново... \n\n";
+			mfunction = true;
+			}
+		}
+	system("pause");
 }
