@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+int NOD(int n1, int n2)
+{
+	int div;
+	if (n1 == n2)  return n1;
+	int d = n1 - n2;
+	if (d < 0) {
+		d = -d;  div = NOD(n1, d);
+	}
+	else
+		div = NOD(n2, d);
+	return div;
+}
+
+int NOK(int n1, int n2)
+{
+	return n1 * n2 / NOD(n1, n2);
+}
+
+void factorial() {
+	int n;
+	int i;
+	int res;
+	
+	cout << "Введите число: ";
+	cin >> n;
+	res = 1;
+	for (i = 1; i <= n; i++) {
+		res = res * i;
+	}
+	cout << "Факториал: " << res << "\n\n";
+}
+
+void chisla() {
+	int  N;
+	cout << "Введите N: ";
+	cin >> N;
+
+	cout << 2 << endl;
+
+	for (int j = 3; j < N; j += 2)
+	{
+		bool flag = true;
+		if (j % 2 == 0) continue;
+		for (int a = 3; a * a <= j; a += 2)
+		{
+			if (j % a == 0)
+			{
+				flag = false;
+				break;
+			}
+		}
+		if (flag) cout << j << endl;
+	}
+
+}
+
+int main()
+{
+	setlocale(LC_ALL,"rus");
+	int n1, n2;
+	cout << "n1=";
+	cin >> n1;
+	cout << "n2=";
+	cin >> n2;
+	cout << "НОК: " << NOK(n1, n2) << "\n";
+	cout << "НОД: " << NOD(n1, n2) << "\n\n"; 
+
+	factorial();
+	chisla();
+	cin.get(); cin.get();
+	return 0;
+}
