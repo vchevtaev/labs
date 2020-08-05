@@ -1,0 +1,115 @@
+import os
+import csv
+
+car_list = []
+
+
+class CarBase:
+	photo_file_names = ['.jpg', '.jpeg', '.gif', '.png']
+
+	def get_photo_file_ext(self):
+		if os.path.splitext(self.photo_file_name)[1] in self.photo_file_names:
+			return os.path.splitext(self.photo_file_name)[1]
+		else:
+			return False
+
+	def __init__(self, brand, photo_file_name, carrying):
+		self.brand = brand
+		self.photo_file_name = photo_file_name
+		self.carrying = carrying
+
+
+class Car(CarBase):
+	def __init__(self, brand, passenger_seats_count, photo_file_name, carrying):
+		super().__init__(brand, photo_file_name, carrying)
+		self.car_type = 'car'
+		self.passenger_seats_count = passenger_seats_count
+
+
+def get_body_lwh(in_lwh):
+	lwh = in_lwh.split('x')
+	if len(lwh) != 3:
+		lwh.clear()
+		for i in range(3):
+			lwh.append(0)
+		return lwh
+	else:
+		try:
+			for i in range(3):
+				lwh[i] = float(lwh[i])
+			return lwh
+		except ValueError:
+			for i in range(3):
+				lwh.append(0)
+			return lwh
+
+
+class Truck(CarBase):
+	def __init__(self, brand, photo_file_name, carrying, body_whl):
+		super().__init__(brand, photo_file_name, carrying)
+		self.body_length = get_body_lwh(body_whl)[0]
+		self.body_width = get_body_lwh(body_whl)[1]
+		self.body_height = get_body_lwh(body_whl)[2]
+		self.car_type = 'truck'
+
+	def get_body_value(self):
+		return self.body_length * self.body_width * self.body_height
+
+
+class SpecMachine(CarBase):
+	def __init__(self, brand, photo_file_name, carrying, extra):
+		super().__init__(brand, photo_file_name, carrying)
+		self.extra = extra
+		self.car_type = 'spec_machine'
+
+
+def create_car_object(brand, carrying, photo_file_name, passenger_seats_count):
+	if type(carrying) != float or type(passenger_seats_count) != int:
+		return False
+	else:
+		return Car(brand, carrying, photo_file_name, passenger_seats_count)
+
+
+def create_truck_object(brand, carrying, photo_file_name, body_whl):
+	return Truck(brand, carrying, photo_file_name, body_whl)
+
+
+def create_spec_machine_object(brand, carrying, photo_file_name, extra):
+	return SpecMachine(brand, carrying, photo_file_name, extra)
+
+
+def get_car_list(path):
+	with open(path, 'r') as file:
+		csv_file = csv.reader(file)
+		for row in csv_file:
+			car_params = row[0].split(';')
+			if car_params[0] == 'car':
+				if create_car_object(brand=car_params[1],
+				                     carrying=car_params[5],
+				                     photo_file_name=car_params[3],
+				                     passenger_seats_count=car_params[2]):
+					car_list.append(create_car_object(brand=car_params[1],
+					                                  carrying=car_params[5],
+					                                  photo_file_name=car_params[3],
+					                                  passenger_seats_count=car_params[2]))
+				else:
+					continue
+			elif car_params[0] == 'truck':
+				try:
+					car = create_truck_object(brand=car_params[1], carrying=car_params[5],
+					                          photo_file_name=car_params[3], body_whl=car_params[4])
+				except (TypeError, ValueError):
+					continue
+				else:
+					car_list.append(car)
+			elif car_params[0] == 'spec_machine':
+				try:
+					car = create_spec_machine_object(brand=car_params[1], carrying=car_params[5],
+					                                 photo_file_name=car_params[3], extra=car_params[6])
+				except (TypeError, ValueError):
+					continue
+				else:
+					car_list.append(car)
+	return car_list
+
+#print(get_car_list("file_csv.csv"))
