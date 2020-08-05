@@ -1,0 +1,52 @@
+import os
+import csv
+
+'''
+Типы: 
+	brand - string
+	passenger_seats_count - int
+	photo_file_name - string
+	carrying - float
+	extra - string
+'''
+
+
+class CarBase:
+	photo_file_ext = ["jpg", "jpeg", "png", "gif"]
+
+	def __init__(self, brand, photo_file_name, carrying):
+		self.brand = brand
+		self.photo_file_name = photo_file_name
+		self.carrying = carrying
+
+	def get_photo_file_ext(self, path):
+		if os.path.splitext(self.photo_file_name)[1] in self.photo_file_ext:
+			return os.path.splitext(self.photo_file_name)[1]
+		else:
+			return False
+
+
+class Car(CarBase):
+	def __init__(self, brand, passenger_seats_count, photo_file_name, carrying):
+		super().__init__(brand, photo_file_name, carrying)
+		self.passenger_seats_count = passenger_seats_count
+
+
+class Truck(CarBase):
+	def __init__(self, brand, photo_file_name, body_whl, carrying):
+		super().__init__(brand, photo_file_name, carrying)
+		self.body_whl = body_whl
+
+
+class SpecMachine(CarBase):
+	def __init__(self, brand, photo_file_name, carrying, extra):
+		super().__init__(brand, photo_file_name, carrying)
+		self.extra = extra
+
+
+if __name__ == '__main__':
+	car = Car('Bugatti Veyron', 'bugatti.png', '0.312', '2')
+	truck = Truck('Nissan', 'nissan.jpeg', '1.5', '3.92x2.09x1.87')
+	spec_machine = SpecMachine('Komatsu-D355', 'd355.jpg', '93', 'pipelayer specs')
+	print("CAR: \nbrand: " + car.brand + "; photo_file_name: " + car.photo_file_name + "; carrying: " + car.carrying +
+	      "; passenger_seats_count: " + car.passenger_seats_count)
